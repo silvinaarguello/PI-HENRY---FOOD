@@ -12,7 +12,7 @@ import Paginado from "../Paginado/paginado";
 import s from './Home.module.css';
 import NavBar from "../navBar/navBar";
 import loader from '../Multimedia/loader.gif';
-import notFound from '../Multimedia/notFound.png';
+import CatError404 from '../Multimedia/CatError404.png';
 import reload from '../Multimedia/reload1.png';
 
 
@@ -83,9 +83,9 @@ return (
     <div>
      <NavBar />
       <div className={s.home}>
-        {isLoading ? (
+        {/* {isLoading ? (
           <img src={loader} alt="Loading..." className={s.loader} />
-        ) : typeof currentRecipes[0] === "object" ? (
+        ) : typeof currentRecipes[0] === "object" ? ( */}
           <div className={s.cards}>
             {currentRecipes?.map((r) => (
               <Card
@@ -97,16 +97,16 @@ return (
               />
             ))}
           </div>
-        ) : (
+        : (
           <div className={s.notFound}>
             <img
-             src={notFound}
+             src={CatError404}
               alt="Recipe Not Found"
               width="800px"
               height="400px"
             />
           </div>
-        )}
+        )
         <div className={s.filters}>
           <button className={s.btnReload} onClick={ e =>{handleClick(e)}}>
             <img src={reload} alt="Reload" width="50px" />
