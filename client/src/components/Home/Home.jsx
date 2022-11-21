@@ -13,6 +13,7 @@ import s from './Home.module.css';
 import NavBar from "../navBar/navBar";
 import loader from '../Multimedia/loader.gif';
 import notFound from '../Multimedia/notFound.png';
+import reload from '../Multimedia/reload1.png';
 
 
 
@@ -108,7 +109,7 @@ return (
         )}
         <div className={s.filters}>
           <button className={s.btnReload} onClick={ e =>{handleClick(e)}}>
-            <img  alt="Reload" width="27px" />
+            <img src={reload} alt="Reload" width="50px" />
           </button>
           <div>
             <form onClick={e =>{handleSubmit(e)}}>

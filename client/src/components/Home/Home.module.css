@@ -1,5 +1,5 @@
 html body {
-     background: url("../Multimedia/backgraund3.jpg") no-repeat center center fixed; 
+     background: url("../Multimedia/backgraund3.png") no-repeat center center fixed; 
     background-size:cover;
     width: 100%;
   }
@@ -27,14 +27,13 @@ html body {
     align-items: center;
    background: url("../Multimedia/table.jpg") no-repeat center center; 
     border-radius: 2rem;
-    background-size: cover;
+    background-size:cover;
     width: 30rem;
-    height: 43rem;
+    height: 50rem;
   }
   .btnReload {
-    background: url*("../Multimedia/Reload.png") no-repeat center;
     margin-top: 3rem;
-    margin-left: -23rem;
+    margin-left: -15rem;
     width: fit-content;
     border-radius: 2rem;
     box-shadow: 0 0 0.5rem rgba(24, 22, 22, 0.678);

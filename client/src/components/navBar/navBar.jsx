@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../Multimedia/volver.png";
-import logoHome from "../Multimedia/home.png";
+import logoHome from "../Multimedia/LogoHomereformado.png";
 import s from './navBar.module.css';
 
 
