@@ -1,11 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getRecipes,   getRecipeName,
+import { 
+    getRecipes,   
+    getRecipeName,
     getDietTypes,
     orderByScore,
     orderByName,
-    filterByType, } from "../../Redux/actions";
+    filterByType, 
+  } from "../../Redux/actions";
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card'
 import Paginado from "../Paginado/paginado";
@@ -29,12 +32,18 @@ export default function Home () {
     
 
     //---------------------PAGINADO------------------------------------------------
-    const [currentPage, setCurrentPage] = useState(1)    //--> Declaro un estado local, currentPage=pagina actual setCurrentPage=cual va a ser la pag actual
-    const [recipesPerPage, setRecipesPerPage] = useState(9)  //--> Declaro otro estado local en donde defino la cantidad de recetas por pagina
-    const indexOfLastRecipe = currentPage * recipesPerPage
-    const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-    const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+            
+    const[currentPage,setCurrentPage] =useState(1)                                             
+    const[recipesPerPage,setrecipesPerPage]=useState(9)                            
+    const indexLastRecipe = currentPage * recipesPerPage                          
+    const indexFirstRecipe = indexLastRecipe - recipesPerPage                    
+    const currentRecipes = recipes.slice(indexFirstRecipe,indexLastRecipe)   
+                                                                                  
+    
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
+    
    
 
 
@@ -50,8 +59,8 @@ const handleClick = (e) => {
 };
 
 const handleInput = (e) => {
-    e.preventDefault();
-    dispatch(e.target.value);
+  e.preventDefault();
+  setName(e.target.value);
 };
 
 const handleSubmit = (e) => {
@@ -83,21 +92,21 @@ return (
     <div>
      <NavBar />
       <div className={s.home}>
-        {/* {isLoading ? (
+        {isLoading ? (
           <img src={loader} alt="Loading..." className={s.loader} />
-        ) : typeof currentRecipes[0] === "object" ? ( */}
+        ) : typeof currentRecipes[0] === "object" ? ( 
           <div className={s.cards}>
             {currentRecipes?.map((r) => (
               <Card
                 key={r.id}
                 image={r.image}
                 name={r.name}
-                diet={r.diet}
+                diets={r.diets}
                 id={r.id}
               />
             ))}
           </div>
-        : (
+        ): (
           <div className={s.notFound}>
             <img
              src={CatError404}
@@ -106,7 +115,7 @@ return (
               height="400px"
             />
           </div>
-        )
+        )}
         <div className={s.filters}>
           <button className={s.btnReload} onClick={ e =>{handleClick(e)}}>
             <img src={reload} alt="Reload" width="50px" />
@@ -152,7 +161,7 @@ return (
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
           </select>
-          <select onChange={orderScore} className={s.select}>
+          <select onChange={e =>orderScore(e)} className={s.select}>
             <option value="all">Order By Score</option>
             <option value="high">Highest Score</option>
             <option value="low">Lowest Score</option>
@@ -163,10 +172,9 @@ return (
         </div>
       </div>
       <Paginado
-        className={s.pagination}
-        recipesPerPage={recipesPerPage}
-        totalRecipes={recipes.length}
-        paginate={paginate}
+  recipesPerPage = {recipesPerPage}
+  allRecipes = {recipes.length}
+  paginado= {paginado}
       />
     </div>
 

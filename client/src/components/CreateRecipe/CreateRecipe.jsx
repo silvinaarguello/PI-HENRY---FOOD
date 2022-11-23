@@ -31,10 +31,10 @@ function validate(input) {
         errors.summary = 'summary is invalid';
     }
 
-    if (!input.instructions) {
-        errors.instructions = 'instructions is required';
-    } else if (!typeof(input.instructions) === 'string') {
-        errors.instructions = 'instructions is invalid';
+    if (!input.steps) {
+        errors.steps = 'instructions is required';
+    } else if (!typeof(input.steps) === 'string') {
+        errors.steps = 'instructions is invalid';
     }
     return errors;
 };
@@ -49,7 +49,7 @@ export default function AddRecipe() {
         summary: '',
         score: '',
         healthScore: '',
-        instructions: '',
+        steps: '',
         diets: []
     })
     const [errors, setErrors] = useState({});
@@ -129,8 +129,8 @@ export default function AddRecipe() {
                 <input required className={s.input} name='instructions' type='' onChange={e => handleChange(e)}></input>
                 <span className={s.highlight}></span>
                 <span className={s.bar}></span>
-                <label> Instructios </label>
-                {   errors.instructions && (<p className={s.danger}>{errors.instructions}</p>)    }
+                <label> Instructions </label>
+                {   errors.steps && (<p className={s.danger}>{errors.steps}</p>)    }
             </div>
             </div>
             
@@ -148,17 +148,19 @@ export default function AddRecipe() {
                         )}
                     )}
                     <div key='all'>
-                        <input className={s.checkbox} type='checkbox' id='all' value='all' onChange={e=>handleChangeDiets(e)}/>
+                        <input className={s.alldiets} type='checkbox' id='all' value='all' onChange={e=>handleChangeDiets(e)}/>
                         No Diets
                     </div>
                 </div>
                     
                 </div>
             </section>
-            <button onClick={handleClick} disabled={errors === {} ? true : false} >Done</button>
+           
+            <button  className={s.btnDone}onClick={handleClick} disabled={errors === {} ? true : false} >Create Recipe</button>
             {
                 response && (<h2 className={s.response}>{response.msg}</h2>)
             }
+        
 
         </div>
     )

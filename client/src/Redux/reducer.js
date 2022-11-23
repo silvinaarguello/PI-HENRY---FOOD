@@ -2,7 +2,7 @@ const initialState ={
     allRecipes: [],
     showedRecipes:[],
     diets:[],
-    recipeDetail: [],
+    detail: [],
     isLoading: true,
 
 
@@ -22,12 +22,14 @@ function rootReducer (state = initialState, action) {
                     showedRecipes: action.payload,
                 };
 
-            case 'GET_DETAIL':
+            case 'GET_DETAILS':
                 return{
                     ...state,
-                    detail: action.payload,
+                    detail: action.payload
+                    
                 };
-            case 'GET_DIETS_TYPES':
+                
+            case 'GET_DIET_TYPES':
                 return{
                     ...state,
                     diets: action.payload,
@@ -41,12 +43,12 @@ function rootReducer (state = initialState, action) {
                 const filterTypes =
                   action.payload === "all"
                     ? allDiets
-                    : allDiets.filter((e) => e.status === action.payload);
+                    : allDiets.filter((r) => r.diets.includes(action.payload));
                 return {
                   ...state,
                   showedRecipes: filterTypes,
                 };
-                                         
+
             case 'ORDER_BY_NAME':
             const orderName = action.payload === 'all' ? state.allRecipes
             : action.payload === 'asc' 
@@ -62,15 +64,37 @@ function rootReducer (state = initialState, action) {
             };
 
             case 'ORDER_BY_SCORE':
-                const orderScore = action.payload === 'all'? state.allRecipes
-            : action.payload === 'hight'
-            ? state.showedRecipes.sort((a,b) => b.score - a.score)
-            : state.showedRecipes.sort((a,b) => a.score - b.score);
-            return{
+            //     const orderScore = action.payload === 'all'? state.allRecipes
+            // : action.payload === 'hight'
+            // ? state.showedRecipes.sort((a,b) => b.score - a.score)
+            // : state.showedRecipes.sort((a,b) => a.score - b.score);
+            // return{
+            //     ...state,
+            //     showedRecipes: orderScore,
+            // };
+            let sortedArrayPop = action.payload === 'high' ? state.allRecipes.sort(function (a,b){
+                if(a.score < b.score) {
+                    return -1;
+                }
+                if(a.score > b.score) {
+                    return 1;
+                }
+                return 0;
+            }) :
+            state.allRecipes.sort(function(a,b){
+                if(a.score > b.score) {
+                    return -1;
+                }
+                if(b.score > a.score) {
+                    return 1;
+                }
+                return 0;
+            })
+            return {
                 ...state,
-                showedRecipes: orderScore,
-            };
-            
+                allRecipes:sortedArrayPop
+            }
+
             default:
                 return {...state,}
 }

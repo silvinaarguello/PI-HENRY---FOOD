@@ -84,8 +84,8 @@ html body {
     height: 2.2rem;
     background: linear-gradient(
       180deg,
-      rgba(233, 139, 62, 0.83) 0%,
-      rgba(255, 255, 255, 0.082) 100%
+      rgba(11, 31, 10, 0.83) 0%,
+      rgba(129, 25, 25, 0.082) 100%
     );
     border: 2px solid rgba(119, 89, 25, 0.6);
     filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
@@ -106,7 +106,7 @@ html body {
     padding: 0.8rem;
     background: linear-gradient(
       rgba(233, 153, 62, 0.486) 0%,
-      rgba(150, 43, 10, 0.76) 100%
+      rgba(99, 36, 7, 0.76) 100%
     );
     box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);

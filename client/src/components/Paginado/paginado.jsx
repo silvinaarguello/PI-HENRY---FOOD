@@ -1,60 +1,20 @@
-import React, {useState} from 'react';
-import s from './paginado.module.css';
+import React from "react";
+import s from './paginado.module.css'
 
-
-export default function Paginate({recipesPerPage, recipes, paginate}){
-    const [input, setInput] = useState(1);
-
-    const previous = () => {
-      setInput(parseInt(input) - 1);
-      recipes(parseInt(input) - 1);
-    };
-  
-    const next = () => {
-      setInput(parseInt(input) + 1);
-      recipes(parseInt(input) + 1);
-    };
-  
-    const enter = (e) => {
-      if (e.keyCode === 13) {
-        recipes(parseInt(e.target.value));
-        if (
-          Number(e.target.value < 1) ||
-          parseInt(e.target.value) > paginate ||
-          isNaN(parseInt(e.target.value))
-        ) {
-            recipes(1);
-          setInput(1);
-        }
-      }
-    };
-    const handleChange = (e) => {
-      setInput(e.target.value);
-    };
-  
-    return (
-      <div>
-        <button className={s.pagination} onClick={previous} disabled={recipesPerPage <= 1}>
-          Prev
-        </button>
-        <input
-          onChange={handleChange}
-          onKeyDown={enter}
-          name="page"
-          value={input}
-          maxLength={2}
-          autoComplete="off"
-          className={s.input}
-        />
-        <span className={s.span}> de {paginate}</span>
-        <button
-          className={s.pagination}
-          onClick={next}
-          disabled={recipesPerPage >= paginate}
-        >
-          Next
-        </button>
-      </div>
-    );
+export default function Paginado ({recipesPerPage ,  allRecipes , paginado}) {
+  const pageNumbers = []
+      for (let i = 0 ; i < Math.ceil(allRecipes/recipesPerPage) ; i++){
+     pageNumbers.push(i+1)
   }
-  
+  return(
+    <nav className={s.nav_container}>
+        <ul className={s.ul_container}>
+            { pageNumbers && pageNumbers.map(number => (
+                <li className={s.li_container} onClick={() => paginado(number)} key={number}>
+                     <button type="button">{number}</button> 
+                </li>
+            ))}
+        </ul>
+    </nav>
+)
+}

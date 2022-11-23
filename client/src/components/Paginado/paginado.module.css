@@ -1,27 +1,33 @@
-.pagination {
-  margin: 2rem 0.25rem;
-  padding: 0.25rem 0.5rem;
-  border: none;
-  border-radius: 0.4rem;
-  background: linear-gradient(
-    180deg,
-    rgb(158, 133, 95) 0%,
-    rgba(71, 35, 15, 0.71) 100%
-  );
-  color: rgb(245, 207, 158);
-  font-size: 15px;
-  cursor: pointer;
+.nav_container{
+  position:relative;
+top: -1030px;
+left: 20%;
 }
 
-.input {
-  text-align: center;
-  width: 1rem;
-  height: 1.35rem;
-  border-radius: 0.25rem;
-  border: 1px solid rgba(245, 222, 179, 0.295);
-  background-color: transparent;
-  color: antiquewhite;
+.ul_container{
+    padding: 0 0 5rem 10rem;
 }
-.span {
-  color: antiquewhite;
+
+.li_container{
+    list-style: none;
+    float: left;
+    margin: 0.2rem;
+    text-align: center;
+}
+
+.li_container button{
+    color: #eeede7;
+    background-color: rgb(174, 177, 18);
+    width: 2.5rem;
+    padding: 0.8rem 0.8rem;
+    border-radius: 30%;
+    border: 1px solid #575025;
+    text-align: center;
+}
+
+.li_container button:hover{
+    background-color: rgb(18, 100, 29);
+    color: #eeede7;
+    border-color: rgb(99, 100, 18);
+
 }

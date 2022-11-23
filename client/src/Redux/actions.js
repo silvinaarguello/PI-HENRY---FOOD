@@ -1,83 +1,107 @@
-import axios from 'axios';
+import axios from "axios";
 
-
-
-//conexion Back y front
-export function getRecipes(){
-    return async function(dispatch){
-        var json = await axios.get('http://localhost:3001/recipes');
-        return dispatch({
+export const getRecipes = () => async dispatch => {
+    
+    try{
+        const recipes = await axios.get('http://localhost:3001/recipes')
+        console.log('accion get recipes')
+        console.log(recipes)
+        dispatch( {
             type: 'GET_RECIPES',
-            payload: json.data,
-            loading: false,
-        });
+            payload: recipes.data,
+            loading: false
+        })
+    }
+    catch(e){
+        console.log(e)
+    }
+
 }
-}
- export function getRecipeName(name){
-  return async function(dispatch){
-    var json = await axios.get(`http://localhost:3001/recipes?name=${name}`);
-    return dispatch({
-      type: 'GET_NAME',
-      payload: json.data,
-                 
+
+export const getRecipeName = (name) => async dispatch =>{
+
+    try {
+        const recipes = await axios.get(`http://localhost:3001/recipes?name=${name}`)
+        console.log('accion get match recipes')
+        console.log(recipes.data)
+
+     dispatch({
+        type: "GET_NAME",
+        payload: recipes.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+export const getRecipeId = (id) => {
+ 
+  return async (dispatch) => {
+    try {
+      const json = await axios.get(`http://localhost:3001/recipes/${id}`);
+       console.log(json.data, 'julio');
+      return dispatch({
+        type: "GET_DETAILS",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+  
+export const getDietTypes = () => async dispatch =>  {
+    try {
+        const dietTypes = await axios.get(`http://localhost:3001/diets`)
+        console.log('accion get diet types')
+        console.log(dietTypes.data)
+      dispatch({
+        type: "GET_DIET_TYPES",
+        payload: dietTypes.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+export const createRecipe = (payload) => async dispatch =>  {
+
+    try {
+      const response = await axios.post(`http://localhost:3001/recipes`,payload);
+      console.log('accion post recipe')
+       console.log(response)
+      getRecipes();
+     dispatch({ 
+        type: "POST_RECIPE", 
+        payload: response 
     });
-  }
-}
-
-export function getRecipeId(id){
-    return async function(dispatch){
-        var json = await axios.get(`http://localhost:3001/recipes/${id}`);
-        return dispatch({
-            type: 'GET_DETAILS',
-            payload: json.data,
-           
-        });
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
 
-export function getDietTypes(){
-    return async function(dispatch){
-        var json = await axios.get('http://localhost:3001/diets');
-        return dispatch({
-            type: 'GET_DIET_TYPES',
-            payload: json.data,
-           
-        });
-    }
-}
 
-export function createRecipe(payload){
-    return async function(dispatch){
-            const response = await axios.post('http://localhost:3001/recipes', payload);
-            return dispatch({
-                type: 'POST_RECIPE',
-                payload: response
-               
-            });
-        }
-}
-
-export function cleanDetail(){
-    return {           
-    type: 'CLEAN_DETAILS',
+export const cleanDetail = () => {
+  return {
+    type: "GET_DETAILS",
     payload: [],
+  };
 };
+
+export const filterByType = (payload) => {
+  return {
+    type: "FILTER_TYPES",
+    payload,
+  };
 };
 
-export function filterByType (payload){
-    return {
-        type: 'FILTER_TYPES',
-        payload: payload,
-    };
-}
-
-export function orderByName(payload){
-    return {
-        type: 'ORDER_BY_NAME',
-        payload: payload,
-    };
-  }
-
+export const orderByName = (payload) => ({
+  type: "ORDER_BY_NAME",
+  payload,
+});
 export function orderByScore(payload){
     return {
         type: 'ORDER_BY_SCORE',
